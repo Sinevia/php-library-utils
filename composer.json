@@ -1,0 +1,20 @@
+{
+    "name": "sinevia/php-library-utils",
+    "description": "PHP Library Utils",
+    "version": "0.0.1",
+    "type": "library",
+    "keywords": ["utils", "library", "php", "sinevia"],    
+    "homepage": "http://github.com/sinevia/php-library-utils",
+    "license": "commercial",
+    "authors": [
+        {
+            "name": "Milan Lesichkov",
+            "email": "lesichkovm@gmail.com",
+            "homepage": "http://lesichkov.co.uk",
+            "role": "Lead Developer"
+        }
+    ],
+    "autoload": {
+        "files": ["src/Utils.php"]
+    }
+}
