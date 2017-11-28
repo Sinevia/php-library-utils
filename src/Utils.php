@@ -182,6 +182,44 @@ class Utils {
         $data = unserialize($decoded);
         return $data;
     }
+    
+    /**
+     * Returns the time in human readable format
+     */
+    public static function getTimeAgo($distant_timestamp, $max_units = 3, $postfix = " ago") {
+        $i = 0;
+        $time = time() - $distant_timestamp; // to get the time since that moment
+        $tokens = [
+            31536000 => 'year',
+            2592000 => 'month',
+            604800 => 'week',
+            86400 => 'day',
+            3600 => 'hour',
+            60 => 'minute',
+            1 => 'second'
+        ];
+
+        $responses = [];
+        while ($i < $max_units) {
+            foreach ($tokens as $unit => $text) {
+                if ($time < $unit) {
+                    continue;
+                }
+                $i++;
+                $numberOfUnits = floor($time / $unit);
+
+                $responses[] = $numberOfUnits . ' ' . $text . (($numberOfUnits > 1) ? 's' : '');
+                $time -= ($unit * $numberOfUnits);
+                break;
+            }
+        }
+
+        if (!empty($responses)) {
+            return implode(', ', $responses) . $postfix;
+        }
+
+        return 'Just now';
+    }
 
     /**
      * Modified to send mail to multiple recepients.
