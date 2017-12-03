@@ -220,6 +220,15 @@ class Utils {
 
         return 'Just now';
     }
+    
+    /**
+     * Checks if script is running on the command-line interface (CLI)
+     * @access public
+     * @return boolean true, if running on the command-line interface (CLI); false, otherwise
+     */
+    function isCli(){
+        return PHP_SAPI === 'cli' || defined('STDIN');
+    }
 
     /**
      * Modified to send mail to multiple recepients.
