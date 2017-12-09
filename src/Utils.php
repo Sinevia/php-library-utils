@@ -563,7 +563,7 @@ class Utils {
      * @return number|string Percentage as number, or as string if postfix provided
      */
     public static function percents($current, $total, $precission = 2, $postfix = null) {
-        $percents = ($current / $total) * 100);
+        $percents = ($current / $total) * 100;
         $percentsRounded = round($percents, $precission);
         if($postfix != null){
             $percentsRounded = $percentsRounded . $postfix;
