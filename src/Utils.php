@@ -182,7 +182,7 @@ class Utils {
         $data = unserialize($decoded);
         return $data;
     }
-    
+
     /**
      * Returns the time in human readable format
      */
@@ -220,13 +220,13 @@ class Utils {
 
         return 'Just now';
     }
-    
+
     /**
      * Checks if script is running on the command-line interface (CLI)
      * @access public
      * @return boolean true, if running on the command-line interface (CLI); false, otherwise
      */
-    function isCli(){
+    function isCli() {
         return PHP_SAPI === 'cli' || defined('STDIN');
     }
 
@@ -552,7 +552,7 @@ class Utils {
         }
         return $url;
     }
-    
+
     /**
      * Calculates percentage given current position and total.
      * If postfix provided (i.e. "%") will return the percentage with the postfix appended.
@@ -565,12 +565,11 @@ class Utils {
     public static function percents($current, $total, $precission = 2, $postfix = null) {
         $percents = ($current / $total) * 100;
         $percentsRounded = round($percents, $precission);
-        if($postfix != null){
+        if ($postfix != null) {
             $percentsRounded = $percentsRounded . $postfix;
         }
         return $percentsRounded;
     }
-
 
     /**
      * Redirects the browser to another page and posts the data specified
