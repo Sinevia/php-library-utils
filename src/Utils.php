@@ -552,6 +552,25 @@ class Utils {
         }
         return $url;
     }
+    
+    /**
+     * Calculates percentage given current position and total.
+     * If postfix provided (i.e. "%") will return the percentage with the postfix appended.
+     * @param number $current
+     * @param number $total
+     * @param number $precission
+     * @param number $postfix
+     * @return number|string Percentage as number, or as string if postfix provided
+     */
+    public static function percents($current, $total, $precission = 2, $postfix = null) {
+        $percents = ($current / $total) * 100);
+        $percentsRounded = round($percents, $precission);
+        if($postfix != null){
+            $percentsRounded = $percentsRounded . $postfix;
+        }
+        return $percentsRounded;
+    }
+
 
     /**
      * Redirects the browser to another page and posts the data specified
