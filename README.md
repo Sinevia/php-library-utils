@@ -22,5 +22,5 @@ Add the following to your composer file:
 ## Usage ##
 
 ```php
-Utils::raiseMemoryLimits();
+\Sinevia\Utils::raiseMemoryLimits();
 ```
