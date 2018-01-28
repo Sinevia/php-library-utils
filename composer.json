@@ -4,7 +4,7 @@
     "type": "library",
     "keywords": ["utils", "library", "php", "sinevia"],    
     "homepage": "http://github.com/sinevia/php-library-utils",
-    "license": "commercial",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Milan Lesichkov",
