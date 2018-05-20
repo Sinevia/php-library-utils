@@ -3,7 +3,7 @@
 // ========================================================================= //
 // SINEVIA PUBLIC                                        http://sinevia.com  //
 // ------------------------------------------------------------------------- //
-// COPYRIGHT (c) 2008-2016 Sinevia Ltd                   All rights reserved //
+// COPYRIGHT (c) 2008-2018 Sinevia Ltd                   All rights reserved //
 // ------------------------------------------------------------------------- //
 // LICENCE: All information contained herein is, and remains, property of    //
 // Sinevia Ltd at all times.  Any intellectual and technical concepts        //
@@ -202,10 +202,13 @@ class Utils {
         $responses = [];
         while ($i < $max_units) {
             foreach ($tokens as $unit => $text) {
+                $i++;
+                
                 if ($time < $unit) {
+                    $i++;
                     continue;
                 }
-                $i++;
+                
                 $numberOfUnits = floor($time / $unit);
 
                 $responses[] = $numberOfUnits . ' ' . $text . (($numberOfUnits > 1) ? 's' : '');
