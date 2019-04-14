@@ -13,9 +13,9 @@
 // unless prior written permission is obtained from Sinevia Ltd per domain.  //
 //===========================================================================//
 
-namespace Sinevia\Utils;
+namespace Sinevia;
 
-class String {
+class StringUtils {
 
     /**
      * Fixes all new lines \r\n to become \n
