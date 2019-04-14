@@ -15,10 +15,12 @@
     ],
     "autoload": {
         "files": [
-            "src/BCsv.php",
-            "src/Utils.php",
-            "src/Csv.php",
-            "src/String.php"
+            "src/BetterCsvUtils.php",
+            "src/CsvUtils.php",
+            "src/DataUtils.php",
+            "src/FileUtils.php",
+            "src/StringUtils.php",
+            "src/Utils.php"
         ]
     }
 }
