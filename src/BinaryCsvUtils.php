@@ -2,7 +2,7 @@
 
 namespace Sinevia;
 
-class BCsv {
+class BinaryCsvUtils {
 
     public static function write($file, $array) {
         $csvTotal = [];
