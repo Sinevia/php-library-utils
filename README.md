@@ -1,23 +1,16 @@
 # PHP Library Utils
-Utility methods for PHP
 
-## Background ##
+The utility library provides multiple helper methods for PHP. These include methods for working with CSV, data, files, strings, etc.
 
 ## Installation ##
 
-Add the following to your composer file:
+### 1. Via Composer ###
 
-```json
-   "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/sinevia/php-library-utils.git"
-        }
-    ],
-    "require": {
-        "sinevia/php-library-utils": "dev-master"
-    },
-```
+composer require sinevia/php-library-utils
+
+### 2. Manually ###
+
+Download from https://github.com/Sinevia/php-library-utils
 
 ## Usage ##
 
