@@ -6,7 +6,9 @@ The utility library provides multiple helper methods for PHP. These include meth
 
 ### 1. Via Composer ###
 
+```
 composer require sinevia/php-library-utils
+```
 
 ### 2. Manually ###
 
