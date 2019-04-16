@@ -20,7 +20,9 @@
             "src/DataUtils.php",
             "src/FileUtils.php",
             "src/StringUtils.php",
-            "src/Utils.php"
+            "src/UidUtils.php",
+            "src/Utils.php",
+            "src/UuidUtils.php"
         ]
     }
 }
