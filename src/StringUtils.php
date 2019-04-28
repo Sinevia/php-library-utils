@@ -113,6 +113,16 @@ class StringUtils {
         return $text;
     }
     
+    
+    /**
+     * Checks whether the string is a valid JSON
+     * @return bool
+     */
+    function isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
+    
     /**
      * Converts a well-formed string with <p> tags to string with <br /> tags
      * @param string $string
