@@ -118,7 +118,7 @@ class StringUtils {
      * Checks whether the string is a valid JSON
      * @return bool
      */
-    function isJson($string) {
+    public static function isJson($string) {
         json_decode($string);
         return (json_last_error() == JSON_ERROR_NONE);
     }
