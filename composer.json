@@ -19,6 +19,7 @@
             "src/CsvUtils.php",
             "src/DataUtils.php",
             "src/FileUtils.php",
+            "src/LinkUtils.php",
             "src/StringUtils.php",
             "src/UidUtils.php",
             "src/Utils.php",
