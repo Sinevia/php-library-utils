@@ -2,6 +2,8 @@
 
 The utility library provides multiple helper methods for PHP. These include methods for working with CSV, data, files, strings, etc.
 
+![No Dependencies](https://img.shields.io/badge/no-dependencies-success.svg)
+
 ## Installation ##
 
 ### 1. Via Composer ###
