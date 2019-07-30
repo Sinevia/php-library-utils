@@ -706,6 +706,19 @@ class Utils {
             }
         }
     }
+    
+    /**
+     * Parses an RSS feed and returns an array
+     * @param string $url the URL of the RSS feed
+     * @return array
+     */
+    public static function rssToArray($url) {
+        $fileContents = file_get_contents($url);
+        $simpleXml = (array) simplexml_load_string($fileContents);
+        $json = json_encode($simpleXml);
+        $array = json_decode($json, TRUE);
+        return $array;
+    }
 
     public static function stringBetween($string, $match_left, $match_right, $ignore_case = false) {
         $function = $ignore_case ? 'stripos' : 'strpos';
