@@ -2,7 +2,7 @@
 
 namespace Sinevia;
 
-class UuidUtils extends Kohana_UUID {
+class UuidUtils extends Kohana_UUID_Utils {
     
 }
 
@@ -24,7 +24,7 @@ class UuidUtils extends Kohana_UUID {
  * @copyright  (c) 2011 Kohana Team
  * @license    http://kohanaframework.org/license
  */
-class Kohana_UUID {
+class Kohana_UUID_Utils {
 
     /**
      * @var  string  DNS namespace
