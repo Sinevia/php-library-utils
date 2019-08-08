@@ -5,7 +5,7 @@ class ArrayUtils {
     /**
      * Returns the speified columns
      */
-    function columns(array $arr, array $keysSelect)
+    public static function columns(array $arr, array $keysSelect)
     {    
         $keys = array_flip($keysSelect);
         $filteredArray = array_map(function($a) use($keys){
