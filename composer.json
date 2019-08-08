@@ -15,6 +15,7 @@
     ],
     "autoload": {
         "files": [
+            "src/ArrayCsvUtils.php",
             "src/BetterCsvUtils.php",
             "src/CsvUtils.php",
             "src/DataUtils.php",
