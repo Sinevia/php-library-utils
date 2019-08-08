@@ -21,3 +21,13 @@ Download from https://github.com/Sinevia/php-library-utils
 ```php
 \Sinevia\Utils::raiseMemoryLimits();
 ```
+
+## Classes ##
+
+### Array Utils ###
+
+### File Utils ###
+
+### String Utils ###
+
+### Utils ###
