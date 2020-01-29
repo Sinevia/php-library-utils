@@ -3,7 +3,6 @@
 The utility library provides multiple helper methods for PHP. These include methods for working with CSV, data, files, strings, etc.
 
 ![No Dependencies](https://img.shields.io/badge/no-dependencies-success.svg)
-[![Build Status](https://img.shields.io/travis/sinevia/php-library-utils/master.svg?style=flat-square)](https://travis-ci.com/Sinevia/php-library-utils)
 ![Tests](https://github.com/Sinevia/php-library-utils/workflows/Tests/badge.svg)
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/sinevia/php-library-utils) 
 
