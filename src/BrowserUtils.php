@@ -19,7 +19,13 @@ namespace Sinevia;
  */
 class BrowserUtils {
     /**
-     * Returns a browser fingerprint
+     * Returns a browser fingerprint of the user based on:
+     * - IP
+     * - user agent
+     * - language
+     * - accepted encoding
+     * - character set 
+     * @return string
      */
     public static function fingerprint() {
         $t1 = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '';
