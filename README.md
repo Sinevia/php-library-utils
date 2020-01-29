@@ -24,12 +24,40 @@ Download from https://github.com/Sinevia/php-library-utils
 \Sinevia\Utils::raiseMemoryLimits();
 ```
 
-## Classes ##
+## Classes and methods ##
 
 ### Array Utils ###
+
+- columns
+```php
+\Sinevia\ArrayUtils::columns();
+```
+
+### Browser Utils ###
+
+- fingerprint
+```php
+\Sinevia\BrowserUtils::fingerprint();
+```
+
+### Data Utils ###
+
+- serialize
+```php
+\Sinevia\DataUtils::serialize($data, $pass);
+```
+
+- unserialize
+```php
+\Sinevia\DataUtils::unserialize($data, $pass);
+```
 
 ### File Utils ###
 
 ### String Utils ###
 
 ### Utils ###
+- ip
+```php
+\Sinevia\Utils::ip();
+```

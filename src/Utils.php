@@ -3,7 +3,7 @@
 // ========================================================================= //
 // SINEVIA PUBLIC                                        http://sinevia.com  //
 // ------------------------------------------------------------------------- //
-// COPYRIGHT (c) 2008-2018 Sinevia Ltd                   All rights reserved //
+// COPYRIGHT (c) 2008-2020 Sinevia Ltd                   All rights reserved //
 // ------------------------------------------------------------------------- //
 // LICENCE: All information contained herein is, and remains, property of    //
 // Sinevia Ltd at all times.  Any intellectual and technical concepts        //
@@ -16,8 +16,7 @@
 namespace Sinevia;
 
 /**
- * Class with convenience functions that do belong anywhere else
- * @version 2.0
+ * Class with general type convenience functions
  */
 class Utils {
 
