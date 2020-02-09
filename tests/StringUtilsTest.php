@@ -1,6 +1,6 @@
 <?php
 
-class BrowserUtilsTest extends \PHPUnit\Framework\TestCase
+class StringUtilsTest extends \PHPUnit\Framework\TestCase
 {
     public function setUp(): void
     {
@@ -23,6 +23,26 @@ class BrowserUtilsTest extends \PHPUnit\Framework\TestCase
 
         $result = \Sinevia\StringUtils::endsWith($initialString,"abc");
         $this->assertFalse($result);
+    }
+
+    public function testHasLowercase(){
+        $initialString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $result = \Sinevia\StringUtils::hasLowercase($initialString);
+        $this->assertFalse($result);
+
+        $initialString = "ABCDEFGHIJkKLMNOPQRSTUVWXYZ";
+        $result = \Sinevia\StringUtils::hasLowercase($initialString);
+        $this->assertTrue($result);
+    }
+
+    public function testHasUppercase(){
+        $initialString = "abcdefghijklmnopqrstuvwxyz";
+        $result = \Sinevia\StringUtils::hasUppercase($initialString);
+        $this->assertFalse($result);
+
+        $initialString = "abcdefghijKklmnopqrstuvwxyz";
+        $result = \Sinevia\StringUtils::hasUppercase($initialString);
+        $this->assertTrue($result);
     }
 
     public function testLeftFrom(){

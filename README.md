@@ -68,8 +68,10 @@ Download from https://github.com/Sinevia/php-library-utils
 - hasSubstring
 - hasUppercase
 - htmlEmailToText
+- isEmail
 - isJson
 - leftFrom
+- maxWords
 - p2br
 - random
 - regexSurround

@@ -3,7 +3,7 @@
 // ========================================================================= //
 // SINEVIA PUBLIC                                        http://sinevia.com  //
 // ------------------------------------------------------------------------- //
-// COPYRIGHT (c) 2008-2019 Sinevia Ltd                   All rights resrved! //
+// COPYRIGHT (c) 2008-2020 Sinevia Ltd                   All rights resrved! //
 // ------------------------------------------------------------------------- //
 // LICENCE: All information contained herein is, and remains, property of    //
 // Sinevia Ltd at all times.  Any intellectual and technical concepts        //
@@ -48,12 +48,32 @@ class StringUtils {
     }
 
     /**
+     * Checks if a string ends with another string
+     * $result = s_str_starts_with("http://server.com",".com");
+     * // $result is true
+     * </code>
+     * @return bool true on success, false otherwise
+     */
+    public static function endsWith($string, $match) {
+        return (substr($string, (strlen($string) - strlen($match)), strlen($match)) == $match) ? true : false;
+    }
+
+    /**
      * Fixes all new lines \r\n to become \n
      */
     public static function fixNewLines($text) {
         $text = str_replace("\r\n", "\n", $text); // replace \r\n to \n
         $text = str_replace("\r", "\n", $text);   // remove \rs
         return $text;
+    }
+
+    function fromCamelCase($input) {
+        preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $input, $matches);
+        $ret = $matches[0];
+        foreach ($ret as &$match) {
+            $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
+        }
+        return implode('_', $ret);
     }
 
     public static function hasMinumumChars($string, $chars) {
@@ -142,6 +162,47 @@ class StringUtils {
 
         return $text;
     }
+
+    /**
+     * Checks if a string is email
+     * @param String $email
+     * @return boolean
+     */
+    public static function isEmail($email) {
+        // Check for invalid characters
+        if (preg_match('/[\x00-\x1F\x7F-\xFF]/', $email))
+            return false;
+
+        // Check that there's one @ symbol, and that the lengths are right
+        if (!preg_match('/^[^@]{1,64}@[^@]{1,255}$/', $email))
+            return false;
+
+        // Split it into sections to make life easier
+        $email_array = explode('@', $email);
+
+        // Check local part
+        $local_array = explode('.', $email_array[0]);
+        foreach ($local_array as $local_part) {
+            if (!preg_match('/^(([A-Za-z0-9!#$%&\'*+\/=?^_`{|}~-]+)|("[^"]+"))$/', $local_part))
+                return false;
+        }
+
+        // Check domain part
+        if (preg_match('/^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}$/', $email_array[1]) || preg_match('/^\[(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}\]$/', $email_array[1])) {
+            return true; // If an IP address
+        } else { // If not an IP address
+            $domain_array = explode('.', $email_array[1]);
+            if (sizeof($domain_array) < 2)
+                return false; // Not enough parts to be a valid domain
+
+            foreach ($domain_array as $domain_part) {
+                if (!preg_match('/^(([A-Za-z0-9][A-Za-z0-9-]{0,61}[A-Za-z0-9])|([A-Za-z0-9])){2,6}$/', $domain_part))
+                    return false;
+            }
+
+            return true;
+        }
+    }
     
     
     /**
@@ -151,6 +212,32 @@ class StringUtils {
     public static function isJson($string) {
         json_decode($string);
         return (json_last_error() == JSON_ERROR_NONE);
+    }
+
+
+
+    /**
+     * Returns the substring on the LHS of a match
+     * @return String|null the substring that was found, null otherwise
+     */
+    public static function leftFrom($string, $match) {
+        $pos = strpos($string, $match);
+        if ($pos === false) {
+            return null;
+        }
+        return substr($string, 0, $pos);
+    }
+
+    /**
+     * Returns the first $num words of $string
+     */
+    public static function maxWords($string, $num, $suffix = '') {
+        $words = explode(' ', $string);
+        if (count($words) < $num) {
+            return $string;
+        } else {
+            return implode(' ', array_slice($words, 0, $num)) . $suffix;
+        }
     }
     
     /**
@@ -213,91 +300,6 @@ class StringUtils {
         }
 
         return substr($string, $start, $end - $start);
-    }
-
-    function from_camel_case($input) {
-        preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $input, $matches);
-        $ret = $matches[0];
-        foreach ($ret as &$match) {
-            $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
-        }
-        return implode('_', $ret);
-    }
-
-    /**
-     * Checks if a string ends with another string
-     * $result = s_str_starts_with("http://server.com",".com");
-     * // $result is true
-     * </code>
-     * @return bool true on success, false otherwise
-     */
-    public static function endsWith($string, $match) {
-        return (substr($string, (strlen($string) - strlen($match)), strlen($match)) == $match) ? true : false;
-    }
-
-    /**
-     * Checks if a string is email
-     * @param type $email
-     * @return boolean
-     */
-    public static function isEmail($email) {
-        // Check for invalid characters
-        if (preg_match('/[\x00-\x1F\x7F-\xFF]/', $email))
-            return false;
-
-        // Check that there's one @ symbol, and that the lengths are right
-        if (!preg_match('/^[^@]{1,64}@[^@]{1,255}$/', $email))
-            return false;
-
-        // Split it into sections to make life easier
-        $email_array = explode('@', $email);
-
-        // Check local part
-        $local_array = explode('.', $email_array[0]);
-        foreach ($local_array as $local_part) {
-            if (!preg_match('/^(([A-Za-z0-9!#$%&\'*+\/=?^_`{|}~-]+)|("[^"]+"))$/', $local_part))
-                return false;
-        }
-
-        // Check domain part
-        if (preg_match('/^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}$/', $email_array[1]) || preg_match('/^\[(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])){3}\]$/', $email_array[1])) {
-            return true; // If an IP address
-        } else { // If not an IP address
-            $domain_array = explode('.', $email_array[1]);
-            if (sizeof($domain_array) < 2)
-                return false; // Not enough parts to be a valid domain
-
-            foreach ($domain_array as $domain_part) {
-                if (!preg_match('/^(([A-Za-z0-9][A-Za-z0-9-]{0,61}[A-Za-z0-9])|([A-Za-z0-9])){2,6}$/', $domain_part))
-                    return false;
-            }
-
-            return true;
-        }
-    }
-
-    /**
-     * Returns the substring on the LHS of a match
-     * @return String|null the substring that was found, null otherwise
-     */
-    public static function leftFrom($string, $match) {
-        $pos = strpos($string, $match);
-        if ($pos === false) {
-            return null;
-        }
-        return substr($string, 0, $pos);
-    }
-
-    /**
-     * Returns the first $num words of $string
-     */
-    public static function maxWords($string, $num, $suffix = '') {
-        $words = explode(' ', $string);
-        if (count($words) < $num) {
-            return $string;
-        } else {
-            return implode(' ', array_slice($words, 0, $num)) . $suffix;
-        }
     }
 
     /**
