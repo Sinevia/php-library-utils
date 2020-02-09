@@ -1,3 +1,5 @@
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/Sinevia/php-library-utils) 
+
 # PHP Library Utils
 
 The utility library provides multiple helper methods for PHP. These include methods for working with CSV, data, files, strings, etc.
@@ -55,6 +57,30 @@ Download from https://github.com/Sinevia/php-library-utils
 ### File Utils ###
 
 ### String Utils ###
+- between
+- camelize
+- endsWith
+- fixNewLines - fixes \r\n to \n
+- hasMinumumChars
+- hasLowercase
+- hasNumber
+- hasOnly
+- hasSubstring
+- hasUppercase
+- htmlEmailToText
+- isJson
+- leftFrom
+- p2br
+- random
+- regexSurround
+- regexReplace
+- rightFrom
+- slugify
+- snakify
+- splitId
+- startsWith
+- substringBetween
+- toWords
 
 ### Utils ###
 - ip

@@ -16,6 +16,36 @@
 namespace Sinevia;
 
 class StringUtils {
+    /**
+     * Returns the substring between two matches
+     * @return String|null the substring that was found, null otherwise
+     */
+    public static function between($string, $matchLeft, $matchRight) {
+        $leftFrom = static::leftFrom($string,$matchRight);
+        
+        if ($leftFrom === null){
+            return null;
+        }
+
+        $rightFrom = static::rightFrom($leftFrom,$matchLeft);
+
+        if ($rightFrom === null){
+            return null;
+        }
+
+        return $rightFrom;
+    }
+
+    public static function camelize($string, $separator = " ", $remove_separator = false) {
+        $string = str_replace($separator, " ", $string);
+        $ucstring = ucwords($string);
+        if ($remove_separator) {
+            $string = str_replace(" ", "", $ucstring);
+        } else {
+            $string = str_replace(" ", $separator, $ucstring);
+        }
+        return $string;
+    }
 
     /**
      * Fixes all new lines \r\n to become \n
@@ -33,13 +63,6 @@ class StringUtils {
         return false;
     }
 
-    public static function hasUppercase($string) {
-        if (preg_match("/[A-Z]/", $string) === 0) {
-            return FALSE;
-        }
-        return true;
-    }
-
     public static function hasLowercase($string) {
         if (preg_match("/[a-z]/", $string) === 0) {
             return FALSE;
@@ -47,12 +70,13 @@ class StringUtils {
         return true;
     }
 
+
     public static function hasNumber($string) {
         if (preg_match("/[0-9]/", $string) === 0) {
             return false;
         }
         return true;
-    }    
+    }
 
     /**
      * Checks whether a string contains only characters specified in the gama.
@@ -73,7 +97,13 @@ class StringUtils {
     public static function hasSubstring($string, $substring) {
         return strpos($string, $substring) === false ? false : true;
     }
-    
+
+    public static function hasUppercase($string) {
+        if (preg_match("/[A-Z]/", $string) === 0) {
+            return FALSE;
+        }
+        return true;
+    } 
     
     /**
      * Simple function to convert HTML email to text
@@ -134,43 +164,7 @@ class StringUtils {
         $noParas = str_replace('<p>', '', $p2brNoEndParas);
         return $noParas;
     }
-    
-    public static function substringBetween($string, $match_left, $match_right, $ignore_case = false) {
-        $function = $ignore_case ? 'stripos' : 'strpos';
 
-        $start = $function($string, $match_left);
-        if ($start === false) {
-            return false;
-        }
-
-        $start += strlen($match_left);
-        $end = $function($string, $match_right, $start);
-        if ($end === false) {
-            return false;
-        }
-
-        return substr($string, $start, $end - $start);
-    }
-
-    public static function camelize($string, $separator = " ", $remove_separator = false) {
-        $string = str_replace($separator, " ", $string);
-        $ucstring = ucwords($string);
-        if ($remove_separator) {
-            $string = str_replace(" ", "", $ucstring);
-        } else {
-            $string = str_replace(" ", $separator, $ucstring);
-        }
-        return $string;
-    }
-    
-    /**
-     * Surrounds a matching regex with prefix and postfix string
-     */
-    public static function regexSurround($string,$regex,$prefix,$postfix){
-        return preg_replace($regex, $prefix.'$1'.$postfix, $string); 
-    }
-    
-    
     /**
      * Replaces a matching regex with match aware replacement string
      * <code>
@@ -179,6 +173,13 @@ class StringUtils {
      */
     public static function regexReplace($string,$regex,$replacementWithMatches){
         return preg_replace($regex, $replacementWithMatches, $string); 
+    }
+    
+    /**
+     * Surrounds a matching regex with prefix and postfix string
+     */
+    public static function regexSurround($string,$regex,$prefix,$postfix){
+        return preg_replace($regex, $prefix.'$1'.$postfix, $string); 
     }
 
     public static function snakify($string, $separator = " ", $remove_separator = false) {
@@ -195,6 +196,23 @@ class StringUtils {
             $string = str_replace(" ", $separator, $string);
         }
         return strtolower($string);
+    }
+    
+    public static function substringBetween($string, $match_left, $match_right, $ignore_case = false) {
+        $function = $ignore_case ? 'stripos' : 'strpos';
+
+        $start = $function($string, $match_left);
+        if ($start === false) {
+            return false;
+        }
+
+        $start += strlen($match_left);
+        $end = $function($string, $match_right, $start);
+        if ($end === false) {
+            return false;
+        }
+
+        return substr($string, $start, $end - $start);
     }
 
     function from_camel_case($input) {
@@ -258,10 +276,15 @@ class StringUtils {
         }
     }
 
+    /**
+     * Returns the substring on the LHS of a match
+     * @return String|null the substring that was found, null otherwise
+     */
     public static function leftFrom($string, $match) {
         $pos = strpos($string, $match);
-        if ($pos === false)
-            return false;
+        if ($pos === false) {
+            return null;
+        }
         return substr($string, 0, $pos);
     }
 
@@ -302,11 +325,17 @@ class StringUtils {
         return implode("", array_splice($chars, 0, $length));
     }
 
+    /**
+     * Returns the substring on the RHS of a match
+     * @return String|null the substring that was found, null otherwise
+     */
     public static function rightFrom($string, $match) {
         $pos = strpos($string, $match);
+
         if ($pos === false) {
-            return false;
+            return null;
         }
+
         return substr($string, $pos + strlen($match));
     }
 
@@ -346,7 +375,7 @@ class StringUtils {
     }
 
     /**
-     * Returns the first $num words of $string
+     * Splits a string by space
      */
     public static function toWords($string) {
 //        $t= array(' ', "\t", '=', '+', '-', '*', '/', '\\', ',', '.', ';', ':', '[', ']', '{', '}', '(', ')', '<', '>', '&', '%', '$', '@', '#', '^', '!', '?', '~'); // separators
