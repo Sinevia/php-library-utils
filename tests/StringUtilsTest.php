@@ -25,6 +25,16 @@ class StringUtilsTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($result);
     }
 
+    public function testHasOnly() {
+        $initialString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $result = \Sinevia\StringUtils::hasOnly($initialString,'ABC');
+        $this->assertFalse($result);
+
+        $initialString = "ABCDEFGHIJkKLMNOPQRSTUVWXYZ";
+        $result = \Sinevia\StringUtils::hasOnly($initialString, $initialString);
+        $this->assertTrue($result);
+    }
+
     public function testHasLowercase(){
         $initialString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $result = \Sinevia\StringUtils::hasLowercase($initialString);
@@ -82,5 +92,12 @@ class StringUtilsTest extends \PHPUnit\Framework\TestCase
 
         $result = \Sinevia\StringUtils::startsWith($initialString,"xyz");
         $this->assertFalse($result);
+    }
+
+    public function testToArray(){
+        $initialString = "abc";
+        $result = \Sinevia\StringUtils::toArray($initialString);
+        $this->assertIsArray($result);
+        $this->assertEquals(3, count($result));
     }
 }

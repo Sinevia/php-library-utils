@@ -379,20 +379,6 @@ class Utils {
     }
 
     /**
-     * A substitution of str_split working with not only ASCII strings.
-     * @param String $string
-     * @return Array
-     */
-    public static function multibyteStringToArray($string) {
-        mb_internal_encoding("UTF-8"); // Important
-        $chars = array();
-        for ($i = 0; $i < mb_strlen($string); $i++) {
-            $chars[] = mb_substr($string, $i, 1);
-        }
-        return $chars;
-    }
-
-    /**
      * Forces a file download
      */
     public static function forceFileDownload($file, $mimetype = 'application/octet-stream') {
@@ -717,29 +703,6 @@ class Utils {
         $json = json_encode($simpleXml);
         $array = json_decode($json, TRUE);
         return $array;
-    }
-
-    /**
-     * Returns the first $num words of $string
-     */
-    public static function stringMaxWords($string, $num, $suffix = '') {
-        $words = explode(' ', $string);
-        if (count($words) < $num) {
-            return $string;
-        } else {
-            return implode(' ', array_slice($words, 0, $num)) . $suffix;
-        }
-    }
-
-    /**
-     * Returns the first $num letters of $string
-     */
-    public static function stringMaxLetters($string, $num, $suffix = '') {
-        if (strlen($string) < $num) {
-            return $string;
-        } else {
-            return substr($string, 0, $num) . $suffix;
-        }
     }
 
     /**

@@ -105,8 +105,8 @@ class StringUtils {
      * @return boolean
      */
     public static function hasOnly($string, $gama) {
-        $chars = self::mb_str_to_array($string);
-        $gama = self::mb_str_to_array($gama);
+        $chars = static::toArray($string);
+        $gama = static::toArray($gama);
         foreach ($chars as $char) {
             if (in_array($char, $gama) == false)
                 return false;
@@ -214,8 +214,6 @@ class StringUtils {
         return (json_last_error() == JSON_ERROR_NONE);
     }
 
-
-
     /**
      * Returns the substring on the LHS of a match
      * @return String|null the substring that was found, null otherwise
@@ -226,6 +224,17 @@ class StringUtils {
             return null;
         }
         return substr($string, 0, $pos);
+    }
+
+    /**
+     * Returns the first $num letters of $string
+     */
+    public static function maxLetters($string, $num, $suffix = '') {
+        if (strlen($string) < $num) {
+            return $string;
+        } else {
+            return substr($string, 0, $num) . $suffix;
+        }
     }
 
     /**
@@ -267,6 +276,21 @@ class StringUtils {
      */
     public static function regexSurround($string,$regex,$prefix,$postfix){
         return preg_replace($regex, $prefix.'$1'.$postfix, $string); 
+    }
+
+    /**
+     * Converts a string to array.
+     * Similar to "str_split" but working with not only ASCII strings.
+     * @param String $string
+     * @return Array
+     */
+    public static function toArray($string) {
+        mb_internal_encoding("UTF-8"); // Important
+        $chars = array();
+        for ($i = 0; $i < mb_strlen($string); $i++) {
+            $chars[] = mb_substr($string, $i, 1);
+        }
+        return $chars;
     }
 
     public static function snakify($string, $separator = " ", $remove_separator = false) {

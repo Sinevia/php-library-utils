@@ -58,6 +58,9 @@ Download from https://github.com/Sinevia/php-library-utils
 
 ### String Utils ###
 - between
+```php
+\Sinevia\StringUtils::between("ABCDEFG","B","E"); // "CD"
+```
 - camelize
 - endsWith
 - fixNewLines - fixes \r\n to \n
@@ -69,11 +72,21 @@ Download from https://github.com/Sinevia/php-library-utils
 - hasUppercase
 - htmlEmailToText
 - isEmail
+```php
+\Sinevia\StringUtils::isEmail("test@test"); // false
+```
 - isJson
+```php
+\Sinevia\StringUtils::isJson("ABC"); // false
+```
 - leftFrom
 - maxWords
 - p2br
 - random
+```php
+\Sinevia\StringUtils::rand(8); // "aBDhkDyD"
+\Sinevia\StringUtils::rand(8, "ABC"); // "BABCCB"
+```
 - regexSurround
 - regexReplace
 - rightFrom
@@ -82,10 +95,29 @@ Download from https://github.com/Sinevia/php-library-utils
 - splitId
 - startsWith
 - substringBetween
+- toArray
+```php
+\Sinevia\StringUtils::toArray("ABC"); // ["A", "B", "C"]
+```
 - toWords
 
 ### Utils ###
+- arrayValueDelete
+- colorNameToHex
+- colorBrightness
+- forceFileDownload
+- forceFileDownloadFromContent
+- getTimeAgo
 - ip
 ```php
 \Sinevia\Utils::ip();
 ```
+- isCli
+- pagination
+- paginationReversed
+- pathToUrl
+- percents
+- redirectAndPostData
+- redirect
+- raiseMemoryLimits
+- rssToArray
