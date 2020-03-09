@@ -56,6 +56,22 @@ Download from https://github.com/Sinevia/php-library-utils
 
 ### File Utils ###
 
+### Link Utils ###
+- getBaseUrl
+```php
+\Sinevia\LinkUtils::getBaseUrl(); // ""
+```
+
+- setBaseUrl
+```php
+\Sinevia\LinkUtils::setBaseUrl("https://yahoo.com"); // ""
+```
+
+- buildUrl
+```php
+\Sinevia\LinkUtils::buildUrl("/", ['a'=>'A', 'b'=>'B']); // "/?a=A&b=B"
+```
+
 ### String Utils ###
 - between
 ```php

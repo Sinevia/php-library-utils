@@ -29,7 +29,8 @@
         ]
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^8.5",
+        "sinevia/php-library-registry": "^2.0"
     },
     "scripts": {
         "test": "vendor/bin/phpunit"
