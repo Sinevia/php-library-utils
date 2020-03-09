@@ -9,7 +9,15 @@ class LinkUtils {
     }
 
     public static function buildUrl($path, $queryData = []) {
-        return self::baseUrl() . '/' . trim($path, '/') . self::query($queryData);
+        $url = self::baseUrl() . '/' . trim($path, '/') . self::query($queryData);
+
+        if (StringUtils::startsWith($url, 'http://') == false and StringUtils::startsWith($url, 'https://') == false) {
+            $serverProtocol = $_SERVER['SERVER_PROTOCOL'] ?? '';
+            $protocol = stripos($serverProtocol, 'https') === 0 ? 'https://' : 'http://';
+            $url = $protocol . $url;
+        }
+
+        return $url;
     }
   
     public static function query($queryData = []) {

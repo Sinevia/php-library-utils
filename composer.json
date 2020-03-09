@@ -15,6 +15,8 @@
     ],
     "autoload": {
         "files": [
+            "src/ArrayUtils.php",
+            "src/BrowserUtils.php",
             "src/BetterCsvUtils.php",
             "src/CsvUtils.php",
             "src/DataUtils.php",
@@ -25,5 +27,11 @@
             "src/Utils.php",
             "src/UuidUtils.php"
         ]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
     }
 }
