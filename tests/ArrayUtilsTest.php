@@ -29,8 +29,12 @@ class ArrayUtilsTest extends \PHPUnit\Framework\TestCase
 
         $array2 = [[1, 2, 3]];
         $result = \Sinevia\ArrayUtils::toCsv($array2);
-        var_dump($result);
+        $this->assertEquals("\"1\",\"2\",\"3\"\n", $result);
+
+        $array2 = [[1, 2, 3]];
+        $result = \Sinevia\ArrayUtils::toCsv($array2,false);
         $this->assertEquals("1,2,3\n", $result);
+
 
         $array1 = [
             [
@@ -43,7 +47,6 @@ class ArrayUtilsTest extends \PHPUnit\Framework\TestCase
             ]
         ];
         $result = \Sinevia\ArrayUtils::ToCsv($array1);
-        var_dump($result);
-        $this->assertEquals("first_name,last_name\nJane,Austin\nCharles,Dickens\n", $result);
+        $this->assertEquals("first_name,last_name\n\"Jane\",\"Austin\"\n\"Charles\",\"Dickens\"\n", $result);
     }
 }

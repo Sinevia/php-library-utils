@@ -4,16 +4,9 @@ namespace Sinevia;
 
 class CsvUtils {
 
-    public static function write($file, $array) {
-        $csvTotal = [];
-        foreach ($array as $row) {
-            $csv = [];
-            foreach ($row as $cell) {
-                $csv[] = $cell;
-            }
-            $csvTotal[] = implode(',', $csv);
-        }
-        file_put_contents($file, implode("\n", $csvTotal));
+    public static function write(string $file, array $array) {
+        $csv = ArrayUtils::toCsv($array);
+        file_put_contents($file, $csv);
     }
 
     public static function read($file) {
