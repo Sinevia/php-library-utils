@@ -39,6 +39,9 @@ class ArrayUtils {
         if (array() === $array) {
             return false;
         }
+        if (count($array) < 1){
+            return false;
+        }
         return array_keys($array) !== range(0, count($array) - 1);
     }
     
@@ -116,8 +119,19 @@ class ArrayUtils {
      * @return text
      */
     public static function toCsv(array $array) {
+        $headers = [];
+        
+        if (count($array)>0 AND self::isAssoc($array)){
+            $headers = array_keys($array[0]);
+        }
+        
         ob_start();
         $fp = fopen('php://output', 'w');
+        
+        if (count($headers) > 0) {
+            fputcsv($fp, $headers);
+        }
+        
         foreach ($array as $row) {
             fputcsv($fp, $row);
         }
