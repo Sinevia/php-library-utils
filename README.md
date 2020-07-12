@@ -30,9 +30,19 @@ Download from https://github.com/Sinevia/php-library-utils
 
 ### Array Utils ###
 
-- columns
+- columns splits the array into columns
 ```php
-\Sinevia\ArrayUtils::columns();
+\Sinevia\ArrayUtils::columns($array);
+```
+
+- isAssoc checks whether an array is associative
+```php
+\Sinevia\ArrayUtils::isAssoc($array);
+```
+
+- toCsv converts an array to CSV. If the array is associative, the keys will be used for a header row
+```php
+\Sinevia\ArrayUtils::toCsv($array);
 ```
 
 ### Browser Utils ###
