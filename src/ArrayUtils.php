@@ -16,7 +16,8 @@ namespace Sinevia;
 
 class ArrayUtils {
     /**
-     * Returns the speified columns
+     * Returns the specified columns
+     * @return array
      */
     public static function columns(array $arr, array $keysSelect)
     {    
@@ -26,6 +27,19 @@ class ArrayUtils {
         }, $arr);
 
         return $filteredArray;
+    }
+    
+    
+    /**
+     * Returns whether the supplied arrat is associative
+     * @return array
+     */
+    function isAssoc(array $array)
+    {
+        if (array() === $array) {
+            return false;
+        }
+        return array_keys($array) !== range(0, count($array) - 1);
     }
     
     /**
