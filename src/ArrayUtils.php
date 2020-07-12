@@ -31,10 +31,10 @@ class ArrayUtils {
     
     
     /**
-     * Returns whether the supplied arrat is associative
+     * Returns whether the supplied array is associative
      * @return array
      */
-    function isAssoc(array $array)
+    public static function isAssoc(array $array)
     {
         if (array() === $array) {
             return false;
@@ -121,7 +121,7 @@ class ArrayUtils {
     public static function toCsv(array $array) {
         $headers = [];
         
-        if (count($array)>0 AND self::isAssoc($array)){
+        if (count($array)>0 AND self::isAssoc($array[0])){
             $headers = array_keys($array[0]);
         }
         
