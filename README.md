@@ -42,7 +42,7 @@ Download from https://github.com/Sinevia/php-library-utils
 
 - toCsv converts an array to CSV. If the array is associative, the keys will be used for a header row
 ```php
-\Sinevia\ArrayUtils::toCsv($array);
+\Sinevia\ArrayUtils::toCsv($array, $forceQuotes=true);
 ```
 
 ### Browser Utils ###
@@ -50,6 +50,14 @@ Download from https://github.com/Sinevia/php-library-utils
 - fingerprint
 ```php
 \Sinevia\BrowserUtils::fingerprint();
+```
+
+
+### Csv Utils ###
+
+- write
+```php
+\Sinevia\CsvUtils::write($filename, $array);
 ```
 
 ### Data Utils ###
