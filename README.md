@@ -1,6 +1,4 @@
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/Sinevia/php-library-utils) 
-
-# PHP Library Utils
+# PHP Library Utils <a href="https://gitpod.io/#https://github.com/Sinevia/php-library-utils" style="float:right:"><img src="https://gitpod.io/button/open-in-gitpod.svg" alt="Open in Gitpod" loading="lazy"></a>
 
 The utility library provides multiple helper methods for PHP. These include methods for working with CSV, data, files, strings, etc.
 
