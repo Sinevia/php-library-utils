@@ -32,9 +32,8 @@ class ArrayUtils {
     
     /**
      * Returns whether the supplied array is associative
-     * @return array
      */
-    public static function isAssoc(array $array)
+    public static function isAssoc(array $array): bool
     {
         if (array() === $array) {
             return false;
@@ -52,8 +51,8 @@ class ArrayUtils {
      *     $array = array("key1"=>"value1","key2"=>"value2");
      *     $array = \Sinevia\Utils::arrayKeyDelete($array,"key1");
      * </code>
-     * @param Array the array, whose key is to be deleted
-     * @param String the key to be deleted
+     * @param array the array, whose key is to be deleted
+     * @param string the key to be deleted
      * @return array the resulting array
      * @tested true
      */
@@ -91,12 +90,12 @@ class ArrayUtils {
      *     }
      *     echo "</table>";
      * </code>
-     * @param Array the array, whic is to be split to columns
+     * @param array the array, whic is to be split to columns
      * @param int number of columns needed
-     * @return Array the column array
+     * @return array the column array
      * @tested not/some modifications at 3.0
      */
-    public static function toColumns(array $array, int $columns) {
+    public static function toColumns(array $array, int $columns): array {
         $overflow = count($array) % $columns;
         $up_items = ceil(count($array) / $columns);
         $down_items = floor(count($array) / $columns);
@@ -157,8 +156,8 @@ class ArrayUtils {
      *     $array = array("key1"=>"value1","key2"=>"value2");
      *     $array = \Sinevia\Utils::arrayValueDelete($array,"value2");
      * </code>
-     * @param Array the array, whose key is to be deleted
-     * @param String the key to be deleted
+     * @param array the array, whose key is to be deleted
+     * @param string the key to be deleted
      * @return array the resulting array
      * @tested true
      */

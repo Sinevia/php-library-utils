@@ -18,7 +18,7 @@ namespace Sinevia;
 class StringUtils {
     /**
      * Returns the substring between two matches
-     * @return String|null the substring that was found, null otherwise
+     * @return string|null the substring that was found, null otherwise
      */
     public static function between($string, $matchLeft, $matchRight) {
         $leftFrom = static::leftFrom($string,$matchRight);
@@ -100,13 +100,13 @@ class StringUtils {
 
     /**
      * Checks whether a string contains only characters specified in the gama.
-     * @param StringUtils $string
-     * @param StringUtils $gama
+     * @param string $string
+     * @param string $gama
      * @return boolean
      */
-    public static function hasOnly($string, $gama) {
-        $chars = static::toArray($string);
-        $gama = static::toArray($gama);
+    public static function hasOnly(string $string, string $gama): bool {
+        $chars = static::toArray(string: $string);
+        $gama = static::toArray(string: $gama);
         foreach ($chars as $char) {
             if (in_array($char, $gama) == false)
                 return false;
@@ -165,7 +165,7 @@ class StringUtils {
 
     /**
      * Checks if a string is email
-     * @param String $email
+     * @param string $email
      * @return boolean
      */
     public static function isEmail($email) {
@@ -216,7 +216,7 @@ class StringUtils {
 
     /**
      * Returns the substring on the LHS of a match
-     * @return String|null the substring that was found, null otherwise
+     * @return string|null the substring that was found, null otherwise
      */
     public static function leftFrom($string, $match) {
         $pos = strpos($string, $match);
@@ -281,8 +281,8 @@ class StringUtils {
     /**
      * Converts a string to array.
      * Similar to "str_split" but working with not only ASCII strings.
-     * @param String $string
-     * @return Array
+     * @param string $string
+     * @return array
      */
     public static function toArray($string) {
         mb_internal_encoding("UTF-8"); // Important
@@ -337,9 +337,9 @@ class StringUtils {
      * </code>
      * @param $length int Integer specifying the desired returned length
      * @param $string String A string with the allowed characters
-     * @return StringUtils
+     * @return string
      */
-    public static function random($length = 8, $string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890") {
+    public static function random($length = 8, $string = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"): string {
         $string = $string . $string . $string;
         $string = $string . $string . $string;
         $string = $string . $string . $string;
@@ -353,7 +353,7 @@ class StringUtils {
 
     /**
      * Returns the substring on the RHS of a match
-     * @return String|null the substring that was found, null otherwise
+     * @return string|null the substring that was found, null otherwise
      */
     public static function rightFrom($string, $match) {
         $pos = strpos($string, $match);
@@ -370,14 +370,14 @@ class StringUtils {
      *  final, numeric id.
      *  @return int
      */
-    public static function splitId($string) {
-        return preg_match('/[_-]([0-9]+)$/', $string, $matches[1]);
-    }
+    // public static function splitId($string): bool|int {
+    //     return preg_match('/[_-]([0-9]+)$/', $string, $matches[1]);
+    // }
 
     /**
      * Creates a friendly URL slug from a string
      */
-    public static function slugify($string) {
+    public static function slugify($string): string {
         $string = preg_replace('/[^a-zA-Z0-9 -]/', '', $string);
         $string = trim($string);
         $string = str_replace("  ", " ", $string);
@@ -396,14 +396,14 @@ class StringUtils {
      * </code>
      * @return bool true on success, false otherwise
      */
-    public static function startsWith($string, $match) {
+    public static function startsWith($string, $match): bool {
         return (substr($string, 0, strlen($match)) == $match) ? true : false;
     }
 
     /**
      * Splits a string by space
      */
-    public static function toWords($string) {
+    public static function toWords($string): array {
 //        $t= array(' ', "\t", '=', '+', '-', '*', '/', '\\', ',', '.', ';', ':', '[', ']', '{', '}', '(', ')', '<', '>', '&', '%', '$', '@', '#', '^', '!', '?', '~'); // separators
 //        $string= str_replace($t, " ", $string);
         $words = explode(' ', $string);

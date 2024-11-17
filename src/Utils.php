@@ -44,7 +44,7 @@ class Utils {
             echo ($v === false) ? 'FALSE' : 'TRUE';
         } elseif (is_object($v)) {
             $alert .= "<pre>";
-            $alert .= var_dump($v, true);
+            $alert .= var_export($v, true);
             $alert .= "</pre>";
         } else {
             $alert = $v;
@@ -59,8 +59,8 @@ class Utils {
      *     $array = array("key1"=>"value1","key2"=>"value2");
      *     $array = \Sinevia\Utils::arrayKeyDelete($array,"key1");
      * </code>
-     * @param Array the array, whose key is to be deleted
-     * @param String the key to be deleted
+     * @param array the array, whose key is to be deleted
+     * @param string the key to be deleted
      * @return array the resulting array
      * @tested true
      */
@@ -98,9 +98,9 @@ class Utils {
      *     }
      *     echo "</table>";
      * </code>
-     * @param Array the array, whic is to be split to columns
+     * @param array the array, whic is to be split to columns
      * @param int number of columns needed
-     * @return Array the column array
+     * @return array the column array
      * @tested not/some modifications at 3.0
      */
     public static function arrayToColumns($array, $columns) {
@@ -123,7 +123,7 @@ class Utils {
     /**
      * Creates a CSV formatted text from array
      * @param array $array
-     * @return text
+     * @return string
      */
     public static function arrayToCsv($array) {
         ob_start();
@@ -142,8 +142,8 @@ class Utils {
      *     $array = array("key1"=>"value1","key2"=>"value2");
      *     $array = \Sinevia\Utils::arrayValueDelete($array,"value2");
      * </code>
-     * @param Array the array, whose key is to be deleted
-     * @param String the key to be deleted
+     * @param array the array, whose key is to be deleted
+     * @param string the key to be deleted
      * @return array the resulting array
      * @tested true
      */
@@ -218,8 +218,8 @@ class Utils {
 
     /**
      * Serializes given data.
-     * @param mix $data
-     * @return String
+     * @param mixed $data
+     * @return string
      */
     public static function dataSerialize($data) {
         $serialized = serialize($data);
@@ -230,8 +230,8 @@ class Utils {
 
     /**
      * Unserializes data.
-     * @param String $base64ed
-     * @return mix
+     * @param string $base64ed
+     * @return mixed
      */
     public static function dataUnserialize($base64ed) {
         $encoded = base64_decode($base64ed);
@@ -415,7 +415,7 @@ class Utils {
      * <code>
      * $ip = \Sinevia\Utils::ip();
      * </code>
-     * @return String the IP address
+     * @return string the IP address
      */
     static function ip() {
         $ip = '';
@@ -446,8 +446,8 @@ class Utils {
      * @param int the total number of the items
      * @param int how many items to be shown on the page
      * @param int the number of the current page
-     * @param String the URL of the page
-     * @return String page navigation
+     * @param string the URL of the page
+     * @return string page navigation
      */
     public static function pagination($num_items, $per_page, $current_page_number, $url, $options = array()) {
         $pagination = "";
@@ -508,8 +508,8 @@ class Utils {
      * @param int the total number of the items
      * @param int how many items to be shown on the page
      * @param int the number of the current page
-     * @param String the URL of the page
-     * @return String page navigation
+     * @param string the URL of the page
+     * @return string page navigation
      */
     public static function paginationReversed($num_items, $per_page, $current_page_number, $url, $options = array()) {
         $pagination = "";
@@ -558,10 +558,10 @@ class Utils {
     /**
      * Return an absolute url from a full PHP script path (i.e. __FILE__).
      * Must be a script on the server.
-     * @param String the absolute path of the file/folder
-     * @param String the absolute path to the root directory
-     * @param String the URL to the root directory
-     * @return String an absolute URL
+     * @param string the absolute path of the file/folder
+     * @param string the absolute path to the root directory
+     * @param string the URL to the root directory
+     * @return string an absolute URL
      */
     public static function pathToUrl($path, $root_dir, $root_url) {
         // Cleaning the path
@@ -657,17 +657,17 @@ class Utils {
     /**
      * Calculates percentage given current position and total.
      * If postfix provided (i.e. "%") will return the percentage with the postfix appended.
-     * @param number $current
-     * @param number $total
-     * @param number $precission
-     * @param number $postfix
-     * @return number|string Percentage as number, or as string if postfix provided
+     * @param int $current
+     * @param int $total
+     * @param int $precission
+     * @param string $postfix
+     * @return float|string Percentage as number, or as string if postfix provided
      */
-    public static function percents($current, $total, $precission = 2, $postfix = null) {
+    public static function percents($current, $total, $precission = 2, $postfix = null): float|string {
         $percents = ($current / $total) * 100;
         $percentsRounded = round($percents, $precission);
         if ($postfix != null) {
-            $percentsRounded = $percentsRounded . $postfix;
+            $percentsRounded = (string)$percentsRounded . $postfix;
         }
         return $percentsRounded;
     }
@@ -758,6 +758,29 @@ class Utils {
     }
 
     /**
+     * Checks if a string ends with another string
+     * $result = s_str_starts_with("http://server.com",".com");
+     * // $result is true
+     * </code>
+     * @return bool true on success, false otherwise
+     */
+    public static function stringEndsWith($string, $match): bool {
+        return (substr($string, (strlen($string) - strlen($match)), strlen($match)) == $match) ? true : false;
+    }
+
+    /**
+     * Checks if a string starts with another string.
+     * <code>
+     * $result = \Sinevia\Utils::stringStartsWith("http://server.com","http://");
+     * // $result is true
+     * </code>
+     * @return bool true on success, false otherwise
+     */
+    public static function stringStartsWith($string, $match): bool {
+        return (substr($string, 0, strlen($match)) == $match) ? true : false;
+    }
+
+    /**
      * Generates a UUID
      * @return string
      */
@@ -783,9 +806,9 @@ class Utils {
      * XOR Encodes a String
      * Encodes a String with another key String using the
      * XOR encryption.
-     * @param String the String to encode
-     * @param String the key String
-     * @return String the XOR encoded String
+     * @param string the String to encode
+     * @param string the key String
+     * @return string the XOR encoded String
      */
     public static function xorEncode($string, $key) {
         for ($i = 0, $j = 0; $i < strlen($string); $i++, $j++) {
@@ -801,9 +824,9 @@ class Utils {
      * XOR Decodes a String
      *
      * Decodes a XOR encrypted String using the same key String.
-     * @param String the String to decode
-     * @param String the key String
-     * @return String the decoded String
+     * @param string the String to decode
+     * @param string the key String
+     * @return string the decoded String
      */
     public static function xorDecode($encstring, $key) {
         $string = base64_decode($encstring);

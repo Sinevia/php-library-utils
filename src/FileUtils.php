@@ -17,23 +17,23 @@ namespace Sinevia;
 
 class FileUtils {
 
-    public static function uploadFileAtS3($s3AccessKey, $s3SecretKey, $filePath, $bucketName, $fileName) {
-        //require_once 'S3.php';
-        S3::setAuth($s3AccessKey, $s3SecretKey);
-        return S3::putObject(S3::inputFile($filePath, false), $bucketName, $fileName, S3::ACL_PUBLIC_READ);
-    }
+    // public static function uploadFileAtS3($s3AccessKey, $s3SecretKey, $filePath, $bucketName, $fileName) {
+    //     //require_once 'S3.php';
+    //     S3::setAuth($s3AccessKey, $s3SecretKey);
+    //     return S3::putObject(S3::inputFile($filePath, false), $bucketName, $fileName, S3::ACL_PUBLIC_READ);
+    // }
 
-    public static function deleteFileAtS3($s3AccessKey, $s3SecretKey, $bucketName, $fileName) {
-        //require_once 'S3.php';
-        S3::setAuth($s3AccessKey, $s3SecretKey);
-        return S3::deleteObject($bucketName, $fileName);
-    }
+    // public static function deleteFileAtS3($s3AccessKey, $s3SecretKey, $bucketName, $fileName) {
+    //     //require_once 'S3.php';
+    //     S3::setAuth($s3AccessKey, $s3SecretKey);
+    //     return S3::deleteObject($bucketName, $fileName);
+    // }
 
-    public static function downloadFileFromS3($s3AccessKey, $s3SecretKey, $bucketName, $fileName, $saveToPath) {
-        //require_once 'S3.php';
-        S3::setAuth($s3AccessKey, $s3SecretKey);
-        return S3::getObject($bucketName, $fileName, $saveToPath);
-    }
+    // public static function downloadFileFromS3($s3AccessKey, $s3SecretKey, $bucketName, $fileName, $saveToPath) {
+    //     //require_once 'S3.php';
+    //     S3::setAuth($s3AccessKey, $s3SecretKey);
+    //     return S3::getObject($bucketName, $fileName, $saveToPath);
+    // }
 
     /**
      * Copies a directory with all its content to a target folder
@@ -46,10 +46,10 @@ class FileUtils {
     public static function directoryCopy($directory, $output_directory, $delete = false) {
         // START: init
         if (is_dir($directory) == false) {
-            throw new RuntimeException("Directory <b>" . $directory . "</b> is NOT found!");
+            throw new \RuntimeException("Directory <b>" . $directory . "</b> is NOT found!");
         }
         if (is_dir($output_directory) == false) {
-            throw new RuntimeException("Directory <b>" . $directory . "</b> is NOT found!");
+            throw new \RuntimeException("Directory <b>" . $directory . "</b> is NOT found!");
         }
         // Does directory exist?
         $dirname = basename($directory);
@@ -163,8 +163,8 @@ class FileUtils {
      * <code>
      * $files = utils::dir_list_files("./data");
      * </code>
-     * @param String the path to the directory
-     * @return Array the files in the directory
+     * @param string the path to the directory
+     * @return array the files in the directory
      */
     public static function directoryListFiles($directory) {
         $directory = rtrim($directory, DIRECTORY_SEPARATOR);
@@ -313,12 +313,12 @@ class FileUtils {
      *     $array = array("key1"=>"value1","key2"=>"value2");
      *     $array = utils::array_value_delete($array,"value2");
      * </code>
-     * @param Array the array, whose key is to be deleted
-     * @param String the key to be deleted
+     * @param array the array, whose key is to be deleted
+     * @param string the key to be deleted
      * @return array the resulting array
      * @tested true
      */
-    private static function arrayValueDelete($array, $value) {
+    private static function arrayValueDelete($array, $value): array {
         $value_index = array_keys(array_values($array), $value);
         if (count($value_index) != '') {
             array_splice($array, $value_index[0], 1);
